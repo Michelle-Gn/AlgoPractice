@@ -74,6 +74,7 @@ console.log(find_substring("aabdec", "abc"));
 // e => 
 // c => 
 
+// d=> 
 
 
 
