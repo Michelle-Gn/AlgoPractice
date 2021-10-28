@@ -76,6 +76,16 @@ console.log(find_substring("aabdec", "abc"));
 
 // d=> 
 
+// Practice with Linked List
 
+const n1 = {
+  data: 100; 
+}; 
+
+const n2 = {
+  data: 200
+}
+
+n1.next = n2; 
 
 
