@@ -12,9 +12,11 @@ const n2 = {
 // console.log('n1', n1); 
 
 class Node {
-  constructor(data, next = null) {
-    this.data = data; 
-    this.next = next; 
+  constructor(key, value) {
+    this.key = key; 
+    this.value = value; 
+    this.prev = null;
+    this.next = null; 
   }
 }
 
@@ -37,15 +39,15 @@ class LinkedList {
 
   insertLast(data) {
     let node = new Node(data); 
-    // check for edge case, if linkedlist is empty
     if (this.head === null) {
       this.head = node; 
     } else {
-      let current = this.head;
+    let current = this.head; 
       while (current.next) {
-        current = current.next; 
-      }
+        current = current.next;
+      } 
       current.next = node; 
+      this.size += 1; 
     }
   }
 
@@ -53,16 +55,15 @@ class LinkedList {
   printLinkedList() {
     let current = this.head; 
     while (current) {
-      console.log(current.data)
+      console.log(current.data); 
       current = current.next; 
     }
   }
 }
 
-let ll = new LinkedList(); 
-ll.insertFirst(100); 
-ll.insertFirst(200); 
-ll.insertLast(300); 
-ll.insertFirst(500); 
-ll.printLinkedList(); 
+let node = new Node(1,1); 
+console.log(node); 
+
+
+
 
