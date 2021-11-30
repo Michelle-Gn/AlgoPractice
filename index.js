@@ -9,59 +9,59 @@
 // 6. shrink window while pattern is present
 // 7. Track window start and window end
 
-const find_substring = function(str, pattern) {
-  // Write your code here
-  let minLength = Infinity; 
-  let substring = ''; 
-  let matched = 0; 
-  let windowStart = 0; 
+// const find_substring = function(str, pattern) {
+//   // Write your code here
+//   let minLength = Infinity; 
+//   let substring = ''; 
+//   let matched = 0; 
+//   let windowStart = 0; 
 
-  let map = {};
-  for (var i = 0; i < pattern.length; i++) {
-    let char = pattern[i]; 
-    if (map[char] === undefined) {
-      map[char] = 1; 
-    } else {
-      map[char] ++; 
-    }
-  }
+//   let map = {};
+//   for (var i = 0; i < pattern.length; i++) {
+//     let char = pattern[i]; 
+//     if (map[char] === undefined) {
+//       map[char] = 1; 
+//     } else {
+//       map[char] ++; 
+//     }
+//   }
 
-  for (var windowEnd = 0; windowEnd < str.length; windowEnd ++) {
-    let rightChar = str[windowEnd];
-    if (rightChar in map) {
-      map[rightChar] -- ; 
-    } 
-    if (map[rightChar] === 0) {
-      matched ++; 
-    }
+//   for (var windowEnd = 0; windowEnd < str.length; windowEnd ++) {
+//     let rightChar = str[windowEnd];
+//     if (rightChar in map) {
+//       map[rightChar] -- ; 
+//     } 
+//     if (map[rightChar] === 0) {
+//       matched ++; 
+//     }
     
-    while (matched === Object.keys(map).length) {
-      if (windowEnd - windowStart + 1 < minLength) {
-        substring = str.substring(windowStart, windowEnd + 1);
-        minLength = windowEnd - windowStart + 1; 
-      }
-      let leftChar = str[windowStart]; 
-      windowStart ++; 
-      if (leftChar in map) {
-        if (map[leftChar] === 0) {
-          matched --;  
-        }
-        map[leftChar] ++; 
-      }
-    }
-  }
+//     while (matched === Object.keys(map).length) {
+//       if (windowEnd - windowStart + 1 < minLength) {
+//         substring = str.substring(windowStart, windowEnd + 1);
+//         minLength = windowEnd - windowStart + 1; 
+//       }
+//       let leftChar = str[windowStart]; 
+//       windowStart ++; 
+//       if (leftChar in map) {
+//         if (map[leftChar] === 0) {
+//           matched --;  
+//         }
+//         map[leftChar] ++; 
+//       }
+//     }
+//   }
 
-  return substring; 
+//   return substring; 
 
-  // return "";
-}
+//   // return "";
+// }
 
-// 'abbca'
-// abbc
-// 
+// // 'abbca'
+// // abbc
+// // 
 
-console.log(find_substring("aabdec", "abc")); 
-// Input: String="aabdec", Pattern="abc"
+// console.log(find_substring("aabdec", "abc")); 
+// // Input: String="aabdec", Pattern="abc"
 // Output: "abdec"
 // Explanation: The smallest substring having all characters of the pattern is "abdec"
 
@@ -78,14 +78,42 @@ console.log(find_substring("aabdec", "abc"));
 
 // Practice with Linked List
 
-const n1 = {
-  data: 100; 
-}; 
+// const n1 = {
+//   data: 100; 
+// }; 
 
-const n2 = {
-  data: 200
+// const n2 = {
+//   data: 200
+// }
+
+// n1.next = n2; 
+
+
+
+// {value : 1, next: {value: 2, next: null}}
+
+
+let deleteThree = function (string) {
+  let stack = []; 
+  for (var i = 0; i < string.length; i++) {
+    let currentLetter = string[i]; 
+    // if current letter is third letter 
+    if (stack[stack.length - 1] === currentLetter && stack[stack.length - 2] === currentLetter) {
+      // delete last 2 letters from stack 
+      stack.pop(); 
+      stack.pop(); 
+    } else {
+      stack.push(currentLetter); 
+    }
+    console.log('stack', stack); 
+  }
+  return stack.join(''); 
 }
 
-n1.next = n2; 
+
+
+
+let input = 'aabbbaccddddc'; 
+console.log(deleteThree(input)); 
 
 
