@@ -315,5 +315,17 @@ console.log(search_triplets([-5, 2, -1, -2, 3]));
 // duplicates check => don't check duplicate targets, don't add duplicate pairs
 // when left === right => now more pairs to check
 
+var twoSum = function(nums, target) {
+  let map = {}; 
+    for (var i = 0; i < nums.length; i++) {
+        let difference = target - nums[i]; 
+        if (map[difference] !== undefined) {
+            return [map[difference], i]
+        } else {
+            map[nums[i]] = i; 
+        }
+    }
+};
+
 
 
