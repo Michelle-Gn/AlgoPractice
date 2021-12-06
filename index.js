@@ -202,55 +202,55 @@
 
 
 
-class Node {
-  constructor(value, next = null) {
-    this.value = value;
-    this.next = next;
-  }
-}
+// class Node {
+//   constructor(value, next = null) {
+//     this.value = value;
+//     this.next = next;
+//   }
+// }
 
 
-function find_cycle_length(head) {
-  let slow = head,
-    fast = head;
+// function find_cycle_length(head) {
+//   let slow = head,
+//     fast = head;
 
-  while (fast !== null && fast.next !== null) {
-    fast = fast.next.next;
-    slow = slow.next;
-    if (slow === fast) { // found the cycle
-      return calculate_cycle_length(slow);
-    }
-  }
-  return 0;
-}
-
-
-function calculate_cycle_length(slow) {
-  let current = slow,
-    cycle_length = 0;
-  while (true) {
-    current = current.next;
-    cycle_length += 1;
-    if (current === slow) {
-      break;
-    }
-  }
-  return cycle_length;
-}
+//   while (fast !== null && fast.next !== null) {
+//     fast = fast.next.next;
+//     slow = slow.next;
+//     if (slow === fast) { // found the cycle
+//       return calculate_cycle_length(slow);
+//     }
+//   }
+//   return 0;
+// }
 
 
-const head = new Node(1);
-head.next = new Node(2);
-head.next.next = new Node(3);
-head.next.next.next = new Node(4);
-head.next.next.next.next = new Node(5);
-head.next.next.next.next.next = new Node(6);
-head.next.next.next.next.next.next = head.next.next;
+// function calculate_cycle_length(slow) {
+//   let current = slow,
+//     cycle_length = 0;
+//   while (true) {
+//     current = current.next;
+//     cycle_length += 1;
+//     if (current === slow) {
+//       break;
+//     }
+//   }
+//   return cycle_length;
+// }
 
-console.log(`LinkedList cycle length: ${find_cycle_length(head)}`);
 
-head.next.next.next.next.next.next = head.next.next.next;
-console.log(`LinkedList cycle length: ${find_cycle_length(head)}`);
+// const head = new Node(1);
+// head.next = new Node(2);
+// head.next.next = new Node(3);
+// head.next.next.next = new Node(4);
+// head.next.next.next.next = new Node(5);
+// head.next.next.next.next.next = new Node(6);
+// head.next.next.next.next.next.next = head.next.next;
+
+// console.log(`LinkedList cycle length: ${find_cycle_length(head)}`);
+
+// head.next.next.next.next.next.next = head.next.next.next;
+// console.log(`LinkedList cycle length: ${find_cycle_length(head)}`);
 
 // let node1 = {val: 1, next: node2}
 // let node2 = {val: 2, next: node3}
@@ -258,6 +258,62 @@ console.log(`LinkedList cycle length: ${find_cycle_length(head)}`);
 // let node4 = {val: 4, next: node5}
 // let node5 = {val: 5, next: node6}
 // let node6 = {val: 6, next: null}
+
+
+function search_triplets(arr) {
+  arr.sort((a, b) => a - b);
+  const triplets = [];
+  for (i = 0; i < arr.length; i++) {
+    if (i > 0 && arr[i] === arr[i - 1]) { // skip same element to avoid duplicate triplets
+      continue;
+    }
+    console.log('target_sum', -arr[i], 'left', i + 1); 
+    search_pair(arr, -arr[i], i + 1, triplets);
+  }
+
+  return triplets;
+}
+
+
+function search_pair(arr, target_sum, left, triplets) {
+  let right = arr.length - 1;
+   console.log('left', left, 'right', right);
+  while (left < right) {
+
+    const current_sum = arr[left] + arr[right];
+    console.log('triplet', current_sum, arr[left], arr[right]); 
+    if (current_sum === target_sum) { // found the triplet
+      triplets.push([-target_sum, arr[left], arr[right]]);
+      left += 1;
+      right -= 1;
+      while (left < right && arr[left] === arr[left - 1]) {
+        left += 1; // skip same element to avoid duplicate triplets
+      }
+      while (left < right && arr[right] === arr[right + 1]) {
+        right -= 1; // skip same element to avoid duplicate triplets
+      }
+    } else if (target_sum > current_sum) {
+      left += 1; // we need a pair with a bigger sum
+    } else {
+      right -= 1; // we need a pair with a smaller sum
+    }
+  }
+}
+
+
+// console.log(search_triplets([-3, 0, 1, 2, -1, 1, -2]));
+console.log(search_triplets([-5, 2, -1, -2, 3]));
+
+// [-5, -2, -1, 2, 3] 
+// [-3, -2, -1, 0, 1, 1, 2], triplets = []
+// search_pair([-3, -2, -1, 0, 1, 1, 2], 3, 1, [])
+// right = 2 
+
+// target = -5 => search [-2 => 3]
+// target = -2 => search [-1 => 3]
+// target = -1 => search [2 => 3]
+// duplicates check => don't check duplicate targets, don't add duplicate pairs
+// when left === right => now more pairs to check
 
 
 

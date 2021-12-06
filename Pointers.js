@@ -129,14 +129,14 @@
 
 // Given the head of a linked list with a cycle in it, find the lenghth of the linked list
 
-class Node {
-  constructor(value, next=null) {
-    this.value = value, 
-    this.next = next
-  }
-}
+// class Node {
+//   constructor(value, next=null) {
+//     this.value = value, 
+//     this.next = next
+//   }
+// }
 
-let find_cycle_length = function (head) {
+// let find_cycle_length = function (head) {
   // 1. Find where slow and fast pointer meets
   // 2. Save slow pointer 
   // 3. Initialize new pointer as pointer after slow pointer
@@ -145,41 +145,41 @@ let find_cycle_length = function (head) {
   // 6. Move to next node in linkedList
   // 7. Increase length 
 
-  let slow = head, fast = head; 
-  let newPointer = head; 
-  let length = 0;
+//   let slow = head, fast = head; 
+//   let newPointer = head; 
+//   let length = 0;
   
-  while (fast !== null && fast.next !== null) {
-    fast = fast.next.next; 
-    slow = slow.next; 
+//   while (fast !== null && fast.next !== null) {
+//     fast = fast.next.next; 
+//     slow = slow.next; 
 
-    if (fast === slow) {
-      newPointer = slow.next; 
-      break; 
-    }
-  }
+//     if (fast === slow) {
+//       newPointer = slow.next; 
+//       break; 
+//     }
+//   }
   
-  while (newPointer !== null) {
-    length ++; 
-    newPointer = newPointer.next; 
-    if (newPointer === slow.next) {
-      break; 
-    }
+//   while (newPointer !== null) {
+//     length ++; 
+//     newPointer = newPointer.next; 
+//     if (newPointer === slow.next) {
+//       break; 
+//     }
 
-  }
+//   }
   
-  return length; 
-}
+//   return length; 
+// }
 
 
 
-const head = new Node(1);
-head.next = new Node(2);
-head.next.next = new Node(3);
-head.next.next.next = new Node(4);
-head.next.next.next.next = new Node(5);
-head.next.next.next.next.next = new Node(6);
-head.next.next.next.next.next.next = head.next.next;
+// const head = new Node(1);
+// head.next = new Node(2);
+// head.next.next = new Node(3);
+// head.next.next.next = new Node(4);
+// head.next.next.next.next = new Node(5);
+// head.next.next.next.next.next = new Node(6);
+// head.next.next.next.next.next.next = head.next.next;
 
 // node1 = {val: 1, next: node2}
 // node2 = {val: 2, next: node3}
@@ -188,7 +188,7 @@ head.next.next.next.next.next.next = head.next.next;
 // node5 = {val: 5, next: node6}
 // node6 = {val: 6, next: node3}
 
-console.log(`LinkedList cycle length: ${find_cycle_length(head)}`);
+// console.log(`LinkedList cycle length: ${find_cycle_length(head)}`);
 
 
 // head.next.next.next.next.next.next = head.next.next.next
@@ -197,5 +197,62 @@ console.log(`LinkedList cycle length: ${find_cycle_length(head)}`);
 // head.next.next.next.next.next.next = head
 // console.log(`LinkedList cycle start: ${find_cycle_start(head).value}`)
 
-head.next.next.next.next.next.next = head.next.next.next;
-console.log(`LinkedList cycle length: ${find_cycle_length(head)}`);
+// head.next.next.next.next.next.next = head.next.next.next;
+// console.log(`LinkedList cycle length: ${find_cycle_length(head)}`);
+
+// Return the node that represents the head of the linked list; 
+
+class Node {
+  constructor(value, next=null) {
+    this.value = value, 
+    this.next = next
+  }
+}
+
+var detectCycle = function(head) {
+    // 1. check if there is a cycle
+    // 2. if cycle -- initiate hashmap storing nodes visited
+    // 3. traverse linked list 
+    // 4. if current node is in hashmap, return current node 
+
+    if (isCycle(head)) {
+        let map = {}; 
+        let current = head; 
+        
+        while (current.next) {
+          console.log(current.value, map, current.value, map[current.value] === undefined)
+            
+          if (map[current.value] !== undefined){
+              console.log(current.value); 
+              return current; 
+          }
+          
+            map[current.value] = true; 
+            
+            current = current.next; 
+        }   
+    } else {
+        return -1; 
+    }
+};
+
+var isCycle = function(head) {
+  let slow = head; 
+  let fast = head; 
+
+  while (fast !== null && fast.next !== null) {
+      slow = slow.next; 
+      fast = fast.next.next; 
+      if (slow === fast) {
+          return true; 
+      }
+  }
+    return false; 
+}
+
+
+const head = new Node(1);
+head.next = new Node(2);
+head.next.next = head; 
+
+console.log(`The head of the linked list is node: ${detectCycle(head)}`); 
