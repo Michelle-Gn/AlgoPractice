@@ -60,59 +60,142 @@
 // // product = 1 * 2 => 2 
 
 
-let removeDuplicates = function(array) {
-  let slow = 1, fast = 1; 
-    while (fast < array.length) {
-      if (array[fast] !== array[slow]) {
-        array[slow] = array[fast]; 
-        slow ++; 
-      } else {
-        fast ++; 
-      }
-    }
-    console.log(array); 
-    return slow;     
-}
+// let removeDuplicates = function(array) {
+//   let slow = 1, fast = 1; 
+//     while (fast < array.length) {
+//       if (array[fast] !== array[slow]) {
+//         array[slow] = array[fast]; 
+//         slow ++; 
+//       } else {
+//         fast ++; 
+//       }
+//     }
+//     console.log(array); 
+//     return slow;     
+// }
 
-console.log(removeDuplicates([1, 1, 2, 3, 4])); 
+// console.log(removeDuplicates([1, 1, 2, 3, 4])); 
 
-// [1, 1, 2] => 2 
-// slow = 1, fast = 1 
-// if array[fast] === unique, increase slow 
-// else increase fast 
-// return slow 
+// // [1, 1, 2] => 2 
+// // slow = 1, fast = 1 
+// // if array[fast] === unique, increase slow 
+// // else increase fast 
+// // return slow 
 
-// array = [1, 1, 2], slow = 2, fast = 2
-// 1 => not unique
-// 2 => unique 
-// return 2 
+// // array = [1, 1, 2], slow = 2, fast = 2
+// // 1 => not unique
+// // 2 => unique 
+// // return 2 
 
+
+// class Node {
+//   constructor(value, next=null){
+//     this.value = value;
+//     this.next = next;
+//   }
+// }
+
+// const find_cycle_start = function(head){
+//   // TODO: Write your code here
+//   let slow = head; 
+//   let fast = head; 
+
+//   // while fast has not reached end of linkedList 
+//     // move fast 2 steps 
+//     // move slow 1 step
+//       // if they meet, there is a cycle 
+    
+//     // return slow
+
+//   return head;
+// };
+
+
+// head = new Node(1)
+// head.next = new Node(2)
+// head.next.next = new Node(3)
+// head.next.next.next = new Node(4)
+// head.next.next.next.next = new Node(5)
+// head.next.next.next.next.next = new Node(6)
+
+// head.next.next.next.next.next.next = head.next.next
+// console.log(`LinkedList cycle start: ${find_cycle_start(head).value}`)
+
+// head.next.next.next.next.next.next = head.next.next.next
+// console.log(`LinkedList cycle start: ${find_cycle_start(head).value}`)
+
+// head.next.next.next.next.next.next = head
+// console.log(`LinkedList cycle start: ${find_cycle_start(head).value}`)
+
+// Given the head of a linked list with a cycle in it, find the lenghth of the linked list
 
 class Node {
-  constructor(value, next=null){
-    this.value = value;
-    this.next = next;
+  constructor(value, next=null) {
+    this.value = value, 
+    this.next = next
   }
 }
 
-const find_cycle_start = function(head){
-  // TODO: Write your code here
-  return head;
-};
+let find_cycle_length = function (head) {
+  // 1. Find where slow and fast pointer meets
+  // 2. Save slow pointer 
+  // 3. Initialize new pointer as pointer after slow pointer
+  // 4. Initialize cycle length var
+  // 5. While new pointer !== pointer after slow pointer
+  // 6. Move to next node in linkedList
+  // 7. Increase length 
+
+  let slow = head, fast = head; 
+  let newPointer = head; 
+  let length = 0;
+  
+  while (fast !== null && fast.next !== null) {
+    fast = fast.next.next; 
+    slow = slow.next; 
+
+    if (fast === slow) {
+      newPointer = slow.next; 
+      break; 
+    }
+  }
+  
+  while (newPointer !== null) {
+    length ++; 
+    newPointer = newPointer.next; 
+    if (newPointer === slow.next) {
+      break; 
+    }
+
+  }
+  
+  return length; 
+}
 
 
-head = new Node(1)
-head.next = new Node(2)
-head.next.next = new Node(3)
-head.next.next.next = new Node(4)
-head.next.next.next.next = new Node(5)
-head.next.next.next.next.next = new Node(6)
 
-head.next.next.next.next.next.next = head.next.next
-console.log(`LinkedList cycle start: ${find_cycle_start(head).value}`)
+const head = new Node(1);
+head.next = new Node(2);
+head.next.next = new Node(3);
+head.next.next.next = new Node(4);
+head.next.next.next.next = new Node(5);
+head.next.next.next.next.next = new Node(6);
+head.next.next.next.next.next.next = head.next.next;
 
-head.next.next.next.next.next.next = head.next.next.next
-console.log(`LinkedList cycle start: ${find_cycle_start(head).value}`)
+// node1 = {val: 1, next: node2}
+// node2 = {val: 2, next: node3}
+// node3 = {val: 3, next: node4}
+// node4 = {val: 4, next: node5}
+// node5 = {val: 5, next: node6}
+// node6 = {val: 6, next: node3}
 
-head.next.next.next.next.next.next = head
-console.log(`LinkedList cycle start: ${find_cycle_start(head).value}`)
+console.log(`LinkedList cycle length: ${find_cycle_length(head)}`);
+
+
+// head.next.next.next.next.next.next = head.next.next.next
+// console.log(`LinkedList cycle start: ${find_cycle_start(head).value}`)
+
+// head.next.next.next.next.next.next = head
+// console.log(`LinkedList cycle start: ${find_cycle_start(head).value}`)
+
+head.next.next.next.next.next.next = head.next.next.next;
+console.log(`LinkedList cycle length: ${find_cycle_length(head)}`);
