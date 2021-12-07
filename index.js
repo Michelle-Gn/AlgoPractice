@@ -328,4 +328,7 @@ var twoSum = function(nums, target) {
 };
 
 
+let validParentheses = function(nums, target) {
+  // use stack
+}
 
