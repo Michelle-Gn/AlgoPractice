@@ -344,16 +344,14 @@ var productExceptSelf = function(nums) {
           leftProducts.push(nums[i-1] * leftProducts[i-1])
       }
   }
-    console.log('left product', leftProducts); 
   for (var j = nums.length - 1; j > -1; j--) {
       if (j === (nums.length -1)) {
         rightProducts[j] = 1; 
       } else {
           console.log(nums[j+1], rightProducts, j, rightProducts[j+1]);
-          rightProducts.unshift(nums[j+1] * rightProducts[j+1]); 
+          rightProducts[j] = (nums[j+1] * rightProducts[j+1]); 
       }
   }
-    console.log('rightProduct', rightProducts); 
 
   for (var k = 0; k < nums.length; k++) {
       container.push(leftProducts[k] * rightProducts[k])
@@ -361,12 +359,17 @@ var productExceptSelf = function(nums) {
     return container; 
 };
 
-productExceptSelf([1,2,3,4]); 
+console.log(productExceptSelf([1,2,3,4])); 
 // [1, 2, 3, 4]
 // num = 1, product = 2 * 3 * 4 
 // num = 2, product = 1 * 3 * 4
 // num = 3, product = 1 * 2 * 4
 // num = 4, product = 1 * 2 * 3 
+
+// i = 3 => [ , , , 1]
+// i = 2 => 4 * 1 => [ , ,4, 1]
+// i = 1 => 3 * 4 => [ ,12, 4, 1]
+// i = 0 => 2 * 12 => [24, 12, 4, 1]
 
 
 // let l = [1, 2], r = [1]; 
@@ -387,11 +390,11 @@ productExceptSelf([1,2,3,4]);
 // i = 3 => 20 * 1 => [1, 4, 20, 20]
 // i = 4 => 20 * 8 => [1, 4, 20, 20, 160]
 
-// j = 4 => [1]
-// j = 3 => 2 * 1 => [1, 2]
-// j = 2 => 8 * 2 => [1, 2, 16]
-// j = 1 => 1 * 16 => [1, 2, 16, 16]
-// j = 0 => 5 * 16 => [1, 2, 16, 16, 80]
+// j = 4 => [ , , , ,1]
+// j = 3 => 2 * 1 => [ , , ,2, 1]
+// j = 2 => 8 * 2 => [ , , 16, 2, 1]
+// j = 1 => 1 * 16 => [ , 16, 16, 2, 1]
+// j = 0 => 5 * 16 => [80, 16, 16, 2, 1]
 
 // 1. initialize array named left 
 // 2. initialize array named right
