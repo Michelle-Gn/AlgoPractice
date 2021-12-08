@@ -260,49 +260,49 @@
 // let node6 = {val: 6, next: null}
 
 
-function search_triplets(arr) {
-  arr.sort((a, b) => a - b);
-  const triplets = [];
-  for (i = 0; i < arr.length; i++) {
-    if (i > 0 && arr[i] === arr[i - 1]) { // skip same element to avoid duplicate triplets
-      continue;
-    }
-    console.log('target_sum', -arr[i], 'left', i + 1); 
-    search_pair(arr, -arr[i], i + 1, triplets);
-  }
+// function search_triplets(arr) {
+//   arr.sort((a, b) => a - b);
+//   const triplets = [];
+//   for (i = 0; i < arr.length; i++) {
+//     if (i > 0 && arr[i] === arr[i - 1]) { // skip same element to avoid duplicate triplets
+//       continue;
+//     }
+//     console.log('target_sum', -arr[i], 'left', i + 1); 
+//     search_pair(arr, -arr[i], i + 1, triplets);
+//   }
 
-  return triplets;
-}
+//   return triplets;
+// }
 
 
-function search_pair(arr, target_sum, left, triplets) {
-  let right = arr.length - 1;
-   console.log('left', left, 'right', right);
-  while (left < right) {
+// function search_pair(arr, target_sum, left, triplets) {
+//   let right = arr.length - 1;
+//    console.log('left', left, 'right', right);
+//   while (left < right) {
 
-    const current_sum = arr[left] + arr[right];
-    console.log('triplet', current_sum, arr[left], arr[right]); 
-    if (current_sum === target_sum) { // found the triplet
-      triplets.push([-target_sum, arr[left], arr[right]]);
-      left += 1;
-      right -= 1;
-      while (left < right && arr[left] === arr[left - 1]) {
-        left += 1; // skip same element to avoid duplicate triplets
-      }
-      while (left < right && arr[right] === arr[right + 1]) {
-        right -= 1; // skip same element to avoid duplicate triplets
-      }
-    } else if (target_sum > current_sum) {
-      left += 1; // we need a pair with a bigger sum
-    } else {
-      right -= 1; // we need a pair with a smaller sum
-    }
-  }
-}
+//     const current_sum = arr[left] + arr[right];
+//     console.log('triplet', current_sum, arr[left], arr[right]); 
+//     if (current_sum === target_sum) { // found the triplet
+//       triplets.push([-target_sum, arr[left], arr[right]]);
+//       left += 1;
+//       right -= 1;
+//       while (left < right && arr[left] === arr[left - 1]) {
+//         left += 1; // skip same element to avoid duplicate triplets
+//       }
+//       while (left < right && arr[right] === arr[right + 1]) {
+//         right -= 1; // skip same element to avoid duplicate triplets
+//       }
+//     } else if (target_sum > current_sum) {
+//       left += 1; // we need a pair with a bigger sum
+//     } else {
+//       right -= 1; // we need a pair with a smaller sum
+//     }
+//   }
+// }
 
 
 // console.log(search_triplets([-3, 0, 1, 2, -1, 1, -2]));
-console.log(search_triplets([-5, 2, -1, -2, 3]));
+// console.log(search_triplets([-5, 2, -1, -2, 3]));
 
 // [-5, -2, -1, 2, 3] 
 // [-3, -2, -1, 0, 1, 1, 2], triplets = []
@@ -315,20 +315,88 @@ console.log(search_triplets([-5, 2, -1, -2, 3]));
 // duplicates check => don't check duplicate targets, don't add duplicate pairs
 // when left === right => now more pairs to check
 
-var twoSum = function(nums, target) {
-  let map = {}; 
-    for (var i = 0; i < nums.length; i++) {
-        let difference = target - nums[i]; 
-        if (map[difference] !== undefined) {
-            return [map[difference], i]
-        } else {
-            map[nums[i]] = i; 
-        }
-    }
+// var twoSum = function(nums, target) {
+//   let map = {}; 
+//     for (var i = 0; i < nums.length; i++) {
+//         let difference = target - nums[i]; 
+//         if (map[difference] !== undefined) {
+//             return [map[difference], i]
+//         } else {
+//             map[nums[i]] = i; 
+//         }
+//     }
+// };
+
+
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var productExceptSelf = function(nums) {
+  let container = []; 
+  let leftProducts = []; 
+  let rightProducts = []; 
+    
+  for (var i = 0; i < nums.length; i++) {
+      if (i === 0) {
+          leftProducts.push(1)
+      } else {
+          leftProducts.push(nums[i-1] * leftProducts[i-1])
+      }
+  }
+    console.log('left product', leftProducts); 
+  for (var j = nums.length - 1; j > -1; j--) {
+      if (j === (nums.length -1)) {
+        rightProducts[j] = 1; 
+      } else {
+          console.log(nums[j+1], rightProducts, j, rightProducts[j+1]);
+          rightProducts.unshift(nums[j+1] * rightProducts[j+1]); 
+      }
+  }
+    console.log('rightProduct', rightProducts); 
+
+  for (var k = 0; k < nums.length; k++) {
+      container.push(leftProducts[k] * rightProducts[k])
+  }
+    return container; 
 };
 
+productExceptSelf([1,2,3,4]); 
+// [1, 2, 3, 4]
+// num = 1, product = 2 * 3 * 4 
+// num = 2, product = 1 * 3 * 4
+// num = 3, product = 1 * 2 * 4
+// num = 4, product = 1 * 2 * 3 
 
-let validParentheses = function(nums, target) {
-  // use stack
-}
+
+// let l = [1, 2], r = [1]; 
+// i = 0, 
+// i = 1, 1 * 1 = 2
+
+// j = 3, 
+// j = 2, 
+
+// [4, 5, 1, 8, 2]
+// num = 4, product = 5 * 1 * 8 * 2
+// num = 5, product = 4 * 1 * 8 * 2
+
+
+// i = 0 => [1]
+// i = 1 => 1 * 4 => [1, 4]
+// i = 2 => 4 * 5 => [1, 4, 20]
+// i = 3 => 20 * 1 => [1, 4, 20, 20]
+// i = 4 => 20 * 8 => [1, 4, 20, 20, 160]
+
+// j = 4 => [1]
+// j = 3 => 2 * 1 => [1, 2]
+// j = 2 => 8 * 2 => [1, 2, 16]
+// j = 1 => 1 * 16 => [1, 2, 16, 16]
+// j = 0 => 5 * 16 => [1, 2, 16, 16, 80]
+
+// 1. initialize array named left 
+// 2. initialize array named right
+// 3. iterate through input array starting from left 
+// 4. populate the left array using l[i] === l[i - 1] * nums[j - 1]
+// 5. populate the right array using r[i] === r[i + 1] * nums[i + 1]
+
 
