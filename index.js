@@ -328,6 +328,9 @@
 // };
 
 
+
+
+
 /**
  * @param {number[]} nums
  * @return {number[]}
@@ -402,4 +405,7 @@ console.log(productExceptSelf([1,2,3,4]));
 // 4. populate the left array using l[i] === l[i - 1] * nums[j - 1]
 // 5. populate the right array using r[i] === r[i + 1] * nums[i + 1]
 
+// 
+
+// Remember that swapping requires storing a version of the original piece
 
