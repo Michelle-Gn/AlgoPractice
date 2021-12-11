@@ -409,3 +409,27 @@ console.log(productExceptSelf([1,2,3,4]));
 
 // Remember that swapping requires storing a version of the original piece
 
+// Tank that holds the largest amount of water
+
+var maxArea = function(height) {
+    let left = 0, right = height.length - 1, maxArea = 0;
+    
+    while (left < right) {
+        maxArea = Math.max(maxArea, area(left, right, height[left], height[right])); 
+        if (height[left] < height[right]) {
+            left ++
+        } else if (height[right] < height[left]){
+            right --
+        } else {
+            left ++
+        }
+    }
+    
+    return maxArea; 
+};
+
+var area = function(left, right, height1, height2) {
+    let height = Math.min(height1, height2); 
+    let width = right - left; 
+    return width * height; 
+}
