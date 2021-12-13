@@ -435,3 +435,38 @@ var area = function(left, right, height1, height2) {
 }
 
 // Re-do 3sum
+
+var threeSum = function(nums) {
+    nums.sort((a,b) => a-b); 
+    let triplets = []; 
+    for (var i = 0; i < nums.length; i++) {  
+        if (nums[i] === nums[i-1]) {
+            continue; 
+        } 
+        let target = -(nums[i]);
+        searchForPair(target, i, nums, triplets); 
+    }
+    return triplets; 
+};
+
+let searchForPair = function(target, start, array, triplets) {
+    let right = array.length - 1; 
+    let left = start + 1; 
+    while (left < right) {
+        if (array[left] + array[right] === target) {
+            triplets.push([-target, array[left], array[right]]); 
+            left ++; 
+            right --; 
+              while (left < right && array[left] === array[left-1]) {
+                left ++; 
+              }
+              while (left < right && array[right] === array[right+1]) {
+                right --; 
+              }
+        } else if (array[left] + array[right] < target) {
+            left ++; 
+        } else {
+            right --; 
+        }
+    }
+}
