@@ -470,3 +470,47 @@ let searchForPair = function(target, start, array, triplets) {
         }
     }
 }
+
+
+var findMinDifference = function(timePoints) {
+  let minDifference = 999999; 
+  let minutes = timePoints.map((element) => convertToMinutes(element));  
+  minutes.sort((a, b) => a-b); 
+  let left = 0, right = minutes.length - 1; 
+  for (i = 0; i < minutes.length -1; i++) {
+    let difference1 = Math.abs(minutes[i] - minutes[i+1]);
+    let difference2 = Math.abs((minutes[i] + 1440) - minutes[i+1]); 
+    
+    minDifference = Math.min(minDifference, difference1, difference2) 
+  }
+    
+  let first = minutes[0];
+  let last = minutes[minutes.length-1];
+  let difference1 = Math.abs(first-last);
+  let difference2 = Math.abs((first + 1440) - last); 
+
+  return Math.min(minDifference, difference1, difference2); 
+      
+};
+
+// ["23:59", "00:00"]
+// [23, 59] = 23 * 60 + 59 
+// "00": "00" => [24, 0] => 24 * 60 
+
+// covert timePoints to minutes
+
+var convertToMinutes = function(string) {
+    let time = string.split(':'); 
+    let minutes = 0; 
+    
+    for (var i = 0; i < time.length; i++) {
+        let currentChar = time[i]; 
+        if (i === 0) {
+             minutes += parseInt(currentChar) * 60
+        } else {
+            minutes += parseInt(currentChar); 
+        }
+    }
+    return minutes; 
+}
+
