@@ -548,11 +548,45 @@ console.log(length_of_longest_substring('aabccbb', 2));
 console.log(length_of_longest_substring('abbcb', 1));
 console.log(length_of_longest_substring('abccde', 1));
 
-// string = 'aabccbb', k = 2, windowStart = 1, maxLength = 4, maxRepeatLetterCount = 2, frequencyMap = {a: 1, b: 2, c: 2}
+// find largest window length - k, with the most repeating characters 
+
+// string = 'aabccbb', k = 2, windowStart = 2, maxLength = 5, maxRepeatLetterCount = 3, frequencyMap = {a: 0, b: 3, c: 2}
 // windowEnd = 0 => rightChar = 'a',
 // windowEnd = 1 => rightChar = 'a', 
 // windowEnd = 2 => rightChar = 'b',
 // windowEnd = 3 => rightChar = 'c', 
 // windowEnd = 4 => rightChar = 'c', leftChar = 'a'
-// windowEnd = 5 => rightChar = 'b', 
+// windowEnd = 5 => rightChar = 'b', leftChar = 'a'
+// windowEnd = 6 => rightChar = 'b', 6 - 2 + 1 = 5, 5 - 3, new maxLength = 5
 
+
+
+let map = {}; 
+map[' '] = 1; 
+
+console.log(map); 
+
+var lengthOfLongestSubstring = function(s) {
+    let longestString = 0; 
+    let windowStart = 0; 
+    let frequencyMap = {}; 
+    
+    for (var windowEnd = 0; windowEnd < s.length; windowEnd ++) {
+        let rightChar = s[windowEnd]; 
+        if (frequencyMap[rightChar] === undefined) {
+            frequencyMap[rightChar] = 0; 
+        }
+        frequencyMap[rightChar] ++; 
+        
+        while (frequencyMap[rightChar] > 1) {
+            let leftChar = s[windowStart]; 
+            frequencyMap[leftChar] --; 
+            windowStart ++; 
+        }
+    
+    longestString = Math.max(windowEnd - windowStart + 1, longestString); 
+    }
+    
+    return longestString; 
+    
+};
