@@ -335,34 +335,34 @@
  * @param {number[]} nums
  * @return {number[]}
  */
-var productExceptSelf = function(nums) {
-  let container = []; 
-  let leftProducts = []; 
-  let rightProducts = []; 
+// var productExceptSelf = function(nums) {
+//   let container = []; 
+//   let leftProducts = []; 
+//   let rightProducts = []; 
     
-  for (var i = 0; i < nums.length; i++) {
-      if (i === 0) {
-          leftProducts.push(1)
-      } else {
-          leftProducts.push(nums[i-1] * leftProducts[i-1])
-      }
-  }
-  for (var j = nums.length - 1; j > -1; j--) {
-      if (j === (nums.length -1)) {
-        rightProducts[j] = 1; 
-      } else {
-          console.log(nums[j+1], rightProducts, j, rightProducts[j+1]);
-          rightProducts[j] = (nums[j+1] * rightProducts[j+1]); 
-      }
-  }
+//   for (var i = 0; i < nums.length; i++) {
+//       if (i === 0) {
+//           leftProducts.push(1)
+//       } else {
+//           leftProducts.push(nums[i-1] * leftProducts[i-1])
+//       }
+//   }
+//   for (var j = nums.length - 1; j > -1; j--) {
+//       if (j === (nums.length -1)) {
+//         rightProducts[j] = 1; 
+//       } else {
+//           console.log(nums[j+1], rightProducts, j, rightProducts[j+1]);
+//           rightProducts[j] = (nums[j+1] * rightProducts[j+1]); 
+//       }
+//   }
 
-  for (var k = 0; k < nums.length; k++) {
-      container.push(leftProducts[k] * rightProducts[k])
-  }
-    return container; 
-};
+//   for (var k = 0; k < nums.length; k++) {
+//       container.push(leftProducts[k] * rightProducts[k])
+//   }
+//     return container; 
+// };
 
-console.log(productExceptSelf([1,2,3,4])); 
+// console.log(productExceptSelf([1,2,3,4])); 
 // [1, 2, 3, 4]
 // num = 1, product = 2 * 3 * 4 
 // num = 2, product = 1 * 3 * 4
@@ -411,87 +411,85 @@ console.log(productExceptSelf([1,2,3,4]));
 
 // Tank that holds the largest amount of water
 
-var maxArea = function(height) {
-    let left = 0, right = height.length - 1, maxArea = 0;
+// var maxArea = function(height) {
+//     let left = 0, right = height.length - 1, maxArea = 0;
     
-    while (left < right) {
-        maxArea = Math.max(maxArea, area(left, right, height[left], height[right])); 
-        if (height[left] < height[right]) {
-            left ++
-        } else if (height[right] < height[left]){
-            right --
-        } else {
-            left ++
-        }
-    }
+//     while (left < right) {
+//         maxArea = Math.max(maxArea, area(left, right, height[left], height[right])); 
+//         if (height[left] < height[right]) {
+//             left ++
+//         } else if (height[right] < height[left]){
+//             right --
+//         } else {
+//             left ++
+//         }
+//     }
     
-    return maxArea; 
-};
+//     return maxArea; 
+// };
 
-var area = function(left, right, height1, height2) {
-    let height = Math.min(height1, height2); 
-    let width = right - left; 
-    return width * height; 
-}
+// var area = function(left, right, height1, height2) {
+//     let height = Math.min(height1, height2); 
+//     let width = right - left; 
+//     return width * height; 
+// }
 
 // Re-do 3sum
 
-var threeSum = function(nums) {
-    nums.sort((a,b) => a-b); 
-    let triplets = []; 
-    for (var i = 0; i < nums.length; i++) {  
-        if (nums[i] === nums[i-1]) {
-            continue; 
-        } 
-        let target = -(nums[i]);
-        searchForPair(target, i, nums, triplets); 
-    }
-    return triplets; 
-};
+// var threeSum = function(nums) {
+//     nums.sort((a,b) => a-b); 
+//     let triplets = []; 
+//     for (var i = 0; i < nums.length; i++) {  
+//         if (nums[i] === nums[i-1]) {
+//             continue; 
+//         } 
+//         let target = -(nums[i]);
+//         searchForPair(target, i, nums, triplets); 
+//     }
+//     return triplets; 
+// };
 
-let searchForPair = function(target, start, array, triplets) {
-    let right = array.length - 1; 
-    let left = start + 1; 
-    while (left < right) {
-        if (array[left] + array[right] === target) {
-            triplets.push([-target, array[left], array[right]]); 
-            left ++; 
-            right --; 
-              while (left < right && array[left] === array[left-1]) {
-                left ++; 
-              }
-              while (left < right && array[right] === array[right+1]) {
-                right --; 
-              }
-        } else if (array[left] + array[right] < target) {
-            left ++; 
-        } else {
-            right --; 
-        }
-    }
-}
+// let searchForPair = function(target, start, array, triplets) {
+//     let right = array.length - 1; 
+//     let left = start + 1; 
+//     while (left < right) {
+//         if (array[left] + array[right] === target) {
+//             triplets.push([-target, array[left], array[right]]); 
+//             left ++; 
+//             right --; 
+//               while (left < right && array[left] === array[left-1]) {
+//                 left ++; 
+//               }
+//               while (left < right && array[right] === array[right+1]) {
+//                 right --; 
+//               }
+//         } else if (array[left] + array[right] < target) {
+//             left ++; 
+//         } else {
+//             right --; 
+//         }
+//     }
+// }
 
 
-var findMinDifference = function(timePoints) {
-  let minDifference = 999999; 
-  let minutes = timePoints.map((element) => convertToMinutes(element));  
-  minutes.sort((a, b) => a-b); 
-  let left = 0, right = minutes.length - 1; 
-  for (i = 0; i < minutes.length -1; i++) {
-    let difference1 = Math.abs(minutes[i] - minutes[i+1]);
-    let difference2 = Math.abs((minutes[i] + 1440) - minutes[i+1]); 
-    
-    minDifference = Math.min(minDifference, difference1, difference2) 
-  }
-    
-  let first = minutes[0];
-  let last = minutes[minutes.length-1];
-  let difference1 = Math.abs(first-last);
-  let difference2 = Math.abs((first + 1440) - last); 
+// var findMinDifference = function(timePoints) {
+//     var temp, minDiff = Infinity;
+//     timePoints = timePoints.sort();
+//     timePoints = timePoints.map(function (a) {
+//         temp = a.split(":");
+//         return Number(temp[0]) * 60 + Number(temp[1]);
+//     });
+//     console.log(timePoints); 
+//     timePoints.push(timePoints[0] + 1440); // add a day to the lowest one to account for highest one being behind the lowest one
+//     console.log('After adding last item', timePoints);
+//     for(var i = 1; i < timePoints.length; i++){
+//         minDiff = Math.min(minDiff, timePoints[i] - timePoints[i - 1]);
+//     }
+//     return minDiff;             
+// };
+// findMinDifference(["00:00","23:59","00:00"]); 
 
-  return Math.min(minDifference, difference1, difference2); 
-      
-};
+// 24 * 60 = 
 
 // ["23:59", "00:00"]
 // [23, 59] = 23 * 60 + 59 
@@ -499,18 +497,62 @@ var findMinDifference = function(timePoints) {
 
 // covert timePoints to minutes
 
-var convertToMinutes = function(string) {
-    let time = string.split(':'); 
-    let minutes = 0; 
+// var convertToMinutes = function(string) {
+//     let time = string.split(':'); 
+//     let minutes = 0; 
     
-    for (var i = 0; i < time.length; i++) {
-        let currentChar = time[i]; 
-        if (i === 0) {
-             minutes += parseInt(currentChar) * 60
-        } else {
-            minutes += parseInt(currentChar); 
-        }
+//     for (var i = 0; i < time.length; i++) {
+//         let currentChar = time[i]; 
+//         if (i === 0) {
+//              minutes += parseInt(currentChar) * 60
+//         } else {
+//             minutes += parseInt(currentChar); 
+//         }
+//     }
+//     return minutes; 
+// }
+
+
+function length_of_longest_substring(str, k) {
+  let windowStart = 0,
+    maxLength = 0,
+    maxRepeatLetterCount = 0,
+    frequencyMap = {};
+
+  // Try to extend the range [windowStart, windowEnd]
+  for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
+    const rightChar = str[windowEnd];
+    if (!(rightChar in frequencyMap)) {
+      frequencyMap[rightChar] = 0;
     }
-    return minutes; 
+    frequencyMap[rightChar] += 1;
+    maxRepeatLetterCount = Math.max(maxRepeatLetterCount, frequencyMap[rightChar]);
+
+    // Current window size is from windowStart to windowEnd, overall we have a letter which is
+    // repeating 'maxRepeatLetterCount' times, this means we can have a window which has one letter
+    // repeating 'maxRepeatLetterCount' times and the remaining letters we should replace.
+    // if the remaining letters are more than 'k', it is the time to shrink the window as we
+    // are not allowed to replace more than 'k' letters
+    if ((windowEnd - windowStart + 1 - maxRepeatLetterCount) > k) {
+      leftChar = str[windowStart];
+      frequencyMap[leftChar] -= 1;
+      windowStart += 1;
+    }
+
+    maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
+  }
+  return maxLength;
 }
+
+console.log(length_of_longest_substring('aabccbb', 2));
+console.log(length_of_longest_substring('abbcb', 1));
+console.log(length_of_longest_substring('abccde', 1));
+
+// string = 'aabccbb', k = 2, windowStart = 1, maxLength = 4, maxRepeatLetterCount = 2, frequencyMap = {a: 1, b: 2, c: 2}
+// windowEnd = 0 => rightChar = 'a',
+// windowEnd = 1 => rightChar = 'a', 
+// windowEnd = 2 => rightChar = 'b',
+// windowEnd = 3 => rightChar = 'c', 
+// windowEnd = 4 => rightChar = 'c', leftChar = 'a'
+// windowEnd = 5 => rightChar = 'b', 
 
