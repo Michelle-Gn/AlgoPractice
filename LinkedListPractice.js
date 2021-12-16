@@ -64,6 +64,15 @@ class LinkedList {
 let node = new Node(1,1); 
 console.log(node); 
 
+// Classes 
 
+
+
+class Node {
+  constructor (value, tail) {
+    this.value = value; 
+    this.tail = tail; 
+  }
+}
 
 
