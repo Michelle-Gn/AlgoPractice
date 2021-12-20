@@ -76,3 +76,44 @@ class Node {
 }
 
 
+var removeNthFromEnd = function(head, n) {
+    var nNode = findLength(head) - n; 
+    var current = head; 
+    var previous; 
+    
+    if(nNode === 0) {
+        head = head.next; 
+        return head; 
+    }
+    
+    while (nNode > 0) {
+        previous = current; 
+        current = current.next; 
+        nNode --; 
+    }
+    
+    previous.next = current.next; 
+    return head; 
+};
+
+// node 1 = {val: 1, next: node 2}
+// node 2 = {val: 2, next: node 3}
+// node 3 = {val: 3, next: node 4}
+// node 4 = {val: 4, next: node 5}
+// node 5 = {val: 5, next: null}
+
+// prev = node 1, current = node 2, node = 2
+// prev = node 2, current = node 3
+
+var findLength = function (head) {
+    let length = 0; 
+    let current = head; 
+    
+    while (current !== null) {
+        length ++; 
+        current = current.next; 
+    }
+    
+    return length; 
+}
+
