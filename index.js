@@ -513,40 +513,40 @@
 // }
 
 
-function length_of_longest_substring(str, k) {
-  let windowStart = 0,
-    maxLength = 0,
-    maxRepeatLetterCount = 0,
-    frequencyMap = {};
+// function length_of_longest_substring(str, k) {
+//   let windowStart = 0,
+//     maxLength = 0,
+//     maxRepeatLetterCount = 0,
+//     frequencyMap = {};
 
-  // Try to extend the range [windowStart, windowEnd]
-  for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
-    const rightChar = str[windowEnd];
-    if (!(rightChar in frequencyMap)) {
-      frequencyMap[rightChar] = 0;
-    }
-    frequencyMap[rightChar] += 1;
-    maxRepeatLetterCount = Math.max(maxRepeatLetterCount, frequencyMap[rightChar]);
+//   // Try to extend the range [windowStart, windowEnd]
+//   for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
+//     const rightChar = str[windowEnd];
+//     if (!(rightChar in frequencyMap)) {
+//       frequencyMap[rightChar] = 0;
+//     }
+//     frequencyMap[rightChar] += 1;
+//     maxRepeatLetterCount = Math.max(maxRepeatLetterCount, frequencyMap[rightChar]);
 
-    // Current window size is from windowStart to windowEnd, overall we have a letter which is
-    // repeating 'maxRepeatLetterCount' times, this means we can have a window which has one letter
-    // repeating 'maxRepeatLetterCount' times and the remaining letters we should replace.
-    // if the remaining letters are more than 'k', it is the time to shrink the window as we
-    // are not allowed to replace more than 'k' letters
-    if ((windowEnd - windowStart + 1 - maxRepeatLetterCount) > k) {
-      leftChar = str[windowStart];
-      frequencyMap[leftChar] -= 1;
-      windowStart += 1;
-    }
+//     // Current window size is from windowStart to windowEnd, overall we have a letter which is
+//     // repeating 'maxRepeatLetterCount' times, this means we can have a window which has one letter
+//     // repeating 'maxRepeatLetterCount' times and the remaining letters we should replace.
+//     // if the remaining letters are more than 'k', it is the time to shrink the window as we
+//     // are not allowed to replace more than 'k' letters
+//     if ((windowEnd - windowStart + 1 - maxRepeatLetterCount) > k) {
+//       leftChar = str[windowStart];
+//       frequencyMap[leftChar] -= 1;
+//       windowStart += 1;
+//     }
 
-    maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
-  }
-  return maxLength;
-}
+//     maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
+//   }
+//   return maxLength;
+// }
 
-console.log(length_of_longest_substring('aabccbb', 2));
-console.log(length_of_longest_substring('abbcb', 1));
-console.log(length_of_longest_substring('abccde', 1));
+// console.log(length_of_longest_substring('aabccbb', 2));
+// console.log(length_of_longest_substring('abbcb', 1));
+// console.log(length_of_longest_substring('abccde', 1));
 
 // find largest window length - k, with the most repeating characters 
 
@@ -561,35 +561,73 @@ console.log(length_of_longest_substring('abccde', 1));
 
 
 
-let map = {}; 
-map[' '] = 1; 
+// let map = {}; 
+// map[' '] = 1; 
 
-console.log(map); 
+// console.log(map); 
 
-var lengthOfLongestSubstring = function(s) {
-    let longestString = 0; 
-    let windowStart = 0; 
-    let frequencyMap = {}; 
+// var lengthOfLongestSubstring = function(s) {
+//     let longestString = 0; 
+//     let windowStart = 0; 
+//     let frequencyMap = {}; 
     
-    for (var windowEnd = 0; windowEnd < s.length; windowEnd ++) {
-        let rightChar = s[windowEnd]; 
-        if (frequencyMap[rightChar] === undefined) {
-            frequencyMap[rightChar] = 0; 
-        }
-        frequencyMap[rightChar] ++; 
+//     for (var windowEnd = 0; windowEnd < s.length; windowEnd ++) {
+//         let rightChar = s[windowEnd]; 
+//         if (frequencyMap[rightChar] === undefined) {
+//             frequencyMap[rightChar] = 0; 
+//         }
+//         frequencyMap[rightChar] ++; 
         
-        while (frequencyMap[rightChar] > 1) {
-            let leftChar = s[windowStart]; 
-            frequencyMap[leftChar] --; 
-            windowStart ++; 
-        }
+//         while (frequencyMap[rightChar] > 1) {
+//             let leftChar = s[windowStart]; 
+//             frequencyMap[leftChar] --; 
+//             windowStart ++; 
+//         }
     
-    longestString = Math.max(windowEnd - windowStart + 1, longestString); 
-    }
+//     longestString = Math.max(windowEnd - windowStart + 1, longestString); 
+//     }
     
-    return longestString; 
+//     return longestString; 
     
-};
+// };
 
 // Islands dfs
+
+// Problem: Given a nested array as a parameter "testArr", write a function that returns a merged 1-dimensional array that fulfills the following scenarios. 
+
+// Example 1: combineArray([[1,2],[2,4],[3,6]]) => [1,2,3,2,4,6]
+// Example 2: combineArray([[1,4,7],[2,5,8],[3,6,9]]) => [1,2,3,4,5,6,7,8,9]
+
+// combinedArray([1,4,7],[2,5,8],[3,6,9]) => [1,2,3,4,5,6,7,8,9]
+
+// var testArr = function(array) {
+//   var count = 0; 
+//   var container = [];
+
+//   while (count < array.length) {
+//     for (var i = 0; i < array[count].length; i++) {
+//       container.push(array[count][i]); 
+//     }
+//     count ++; 
+//   }
+
+//   return container.sort();  
+  
+// }
+
+// console.log(testArr([[1,4,7],[2,5,8],[3,6,9]]))
+
+
+var word1 = "abc"
+var word2 = "aaaa"
+
+console.log(word1 > word2); 
+
+
+
+
+
+
+
+
 
