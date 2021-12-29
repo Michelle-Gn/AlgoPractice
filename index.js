@@ -618,10 +618,86 @@
 // console.log(testArr([[1,4,7],[2,5,8],[3,6,9]]))
 
 
-var word1 = "abc"
-var word2 = "aaaa"
+// var word1 = "abc"
+// var word2 = "aaaa"
 
-console.log(word1 > word2); 
+// console.log(word1 > word2); 
+
+
+// function that merges 2 strings, instead of lexicographically, merge on 1) occurances in each string, 2) lexographically, 3) whichever character is in the first string
+
+var merge = function (string1, string2) {
+  var merge = ''; 
+
+  var string1Count = {}; 
+  var string2Count = {}; 
+
+  for (var i = 0; i < string1.length; i++) {
+    var current = string1[i]; 
+    string1Count[current] = string1Count[current] ? string1Count[current] + 1 : 1; 
+  }
+
+  for (var j = 0; j < string2.length; j++) {
+    var current = string2[j]; 
+    string2Count[current] = string2Count[current] ? string2Count[current] + 1 : 1; 
+  }
+
+  while (string1.length && string2.length) {
+    var character1 = string1[0]; 
+    var character2 = string2[0]; 
+    
+    var largerChar = largerString(character1, character2, string1Count, string2Count); 
+
+    if (largerChar === character1 && largerChar === character2) { 
+      string1 = string1.slice(1); 
+    }
+    
+    if (largerChar === character1) {
+      string1 = string1.slice(1); 
+    } 
+    
+    if (largerChar === character2) {
+      string2 = string2.slice(1); 
+    } 
+
+    console.log(string1, string2, largerChar); 
+
+    merge = merge.concat(largerChar); 
+    
+  }
+
+  console.log('string1:', string1, 'string2:', string2); 
+  console.log(string1.length, string2.length); 
+  if (string1.length > 0) {
+    merge = merge.concat(string1); 
+  } 
+
+  if (string2.length > 0) {
+    merge = merge.concat(string2); 
+  }
+  
+  return merge; 
+}
+
+
+var largerString = function (string1, string2, string1Count, string2Count) {
+  if (string1Count[string1] > string2Count[string2]) {
+    return string1
+  } else if (string1Count[string2] < string2Count[string2]) {
+    return string2
+  } else {
+    if (string1 > string2) {
+      return string1
+    } else if (string1 < string2) {
+      return string2
+    } else {
+      return string1
+    }
+  }
+}
+
+console.log(merge('abcd', 'bbbbcd')); 
+// should equal 'bb'
 
 
 
