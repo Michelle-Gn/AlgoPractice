@@ -650,14 +650,13 @@ var merge = function (string1, string2) {
 
     if (largerChar === character1 && largerChar === character2) { 
       string1 = string1.slice(1); 
-    }
-    
-    if (largerChar === character1) {
+    } else {
+      if (largerChar === character1) {
       string1 = string1.slice(1); 
-    } 
-    
-    if (largerChar === character2) {
+      } 
+      if (largerChar === character2) {
       string2 = string2.slice(1); 
+      }
     } 
 
     console.log(string1, string2, largerChar); 
@@ -683,12 +682,12 @@ var merge = function (string1, string2) {
 var largerString = function (string1, string2, string1Count, string2Count) {
   if (string1Count[string1] > string2Count[string2]) {
     return string1
-  } else if (string1Count[string2] < string2Count[string2]) {
+  } else if (string1Count[string1] < string2Count[string2]) {
     return string2
   } else {
-    if (string1 > string2) {
+    if (string1 < string2) {
       return string1
-    } else if (string1 < string2) {
+    } else if (string1 > string2) {
       return string2
     } else {
       return string1
@@ -696,8 +695,19 @@ var largerString = function (string1, string2, string1Count, string2Count) {
   }
 }
 
-console.log(merge('abcd', 'bbbbcd')); 
-// should equal 'bb'
+console.log(merge('cdee', 'a')); 
+// 'bbbbaacdee'
+
+
+console.log('a' < 'c'); 
+
+class HashTable {
+  constructor() {
+    this.storage = 0
+  }
+}
+
+
 
 
 
