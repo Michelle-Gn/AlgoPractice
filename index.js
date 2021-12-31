@@ -707,7 +707,7 @@ class HashTable {
   }
 }
 
-
+// make insert function 
 
 
 
