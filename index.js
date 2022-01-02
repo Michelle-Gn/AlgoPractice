@@ -626,102 +626,133 @@
 
 // function that merges 2 strings, instead of lexicographically, merge on 1) occurances in each string, 2) lexographically, 3) whichever character is in the first string
 
-var merge = function (string1, string2) {
-  var merge = ''; 
+// var merge = function (string1, string2) {
+//   var merge = ''; 
 
-  var string1Count = {}; 
-  var string2Count = {}; 
+//   var string1Count = {}; 
+//   var string2Count = {}; 
 
-  for (var i = 0; i < string1.length; i++) {
-    var current = string1[i]; 
-    string1Count[current] = string1Count[current] ? string1Count[current] + 1 : 1; 
-  }
+//   for (var i = 0; i < string1.length; i++) {
+//     var current = string1[i]; 
+//     string1Count[current] = string1Count[current] ? string1Count[current] + 1 : 1; 
+//   }
 
-  for (var j = 0; j < string2.length; j++) {
-    var current = string2[j]; 
-    string2Count[current] = string2Count[current] ? string2Count[current] + 1 : 1; 
-  }
+//   for (var j = 0; j < string2.length; j++) {
+//     var current = string2[j]; 
+//     string2Count[current] = string2Count[current] ? string2Count[current] + 1 : 1; 
+//   }
 
-  while (string1.length && string2.length) {
-    var character1 = string1[0]; 
-    var character2 = string2[0]; 
+//   while (string1.length && string2.length) {
+//     var character1 = string1[0]; 
+//     var character2 = string2[0]; 
     
-    var largerChar = largerString(character1, character2, string1Count, string2Count); 
+//     var largerChar = largerString(character1, character2, string1Count, string2Count); 
 
-    if (largerChar === character1 && largerChar === character2) { 
-      string1 = string1.slice(1); 
-    } else {
-      if (largerChar === character1) {
-      string1 = string1.slice(1); 
-      } 
-      if (largerChar === character2) {
-      string2 = string2.slice(1); 
-      }
-    } 
+//     if (largerChar === character1 && largerChar === character2) { 
+//       string1 = string1.slice(1); 
+//     } else {
+//       if (largerChar === character1) {
+//       string1 = string1.slice(1); 
+//       } 
+//       if (largerChar === character2) {
+//       string2 = string2.slice(1); 
+//       }
+//     } 
 
-    console.log(string1, string2, largerChar); 
+//     console.log(string1, string2, largerChar); 
 
-    merge = merge.concat(largerChar); 
+//     merge = merge.concat(largerChar); 
     
-  }
+//   }
 
-  console.log('string1:', string1, 'string2:', string2); 
-  console.log(string1.length, string2.length); 
-  if (string1.length > 0) {
-    merge = merge.concat(string1); 
-  } 
+//   console.log('string1:', string1, 'string2:', string2); 
+//   console.log(string1.length, string2.length); 
+//   if (string1.length > 0) {
+//     merge = merge.concat(string1); 
+//   } 
 
-  if (string2.length > 0) {
-    merge = merge.concat(string2); 
-  }
+//   if (string2.length > 0) {
+//     merge = merge.concat(string2); 
+//   }
   
-  return merge; 
-}
+//   return merge; 
+// }
 
 
-var largerString = function (string1, string2, string1Count, string2Count) {
-  if (string1Count[string1] > string2Count[string2]) {
-    return string1
-  } else if (string1Count[string1] < string2Count[string2]) {
-    return string2
-  } else {
-    if (string1 < string2) {
-      return string1
-    } else if (string1 > string2) {
-      return string2
-    } else {
-      return string1
-    }
-  }
-}
+// var largerString = function (string1, string2, string1Count, string2Count) {
+//   if (string1Count[string1] > string2Count[string2]) {
+//     return string1
+//   } else if (string1Count[string1] < string2Count[string2]) {
+//     return string2
+//   } else {
+//     if (string1 < string2) {
+//       return string1
+//     } else if (string1 > string2) {
+//       return string2
+//     } else {
+//       return string1
+//     }
+//   }
+// }
 
-console.log(merge('cdee', 'a')); 
-// 'bbbbaacdee'
+// console.log(merge('cdee', 'a')); 
+// // 'bbbbaacdee'
 
 
-console.log('a' < 'c'); 
+// console.log('a' < 'c'); 
 
-class HashTable {
-  constructor() {
-    this.storage = 0
-  }
-}
+// class HashTable {
+//   constructor() {
+//     this.storage = 0
+//   }
+// }
 
 // make insert function 
 
 
-var makeKey = function (key) {
-  var hashChar = 0; 
-  var keyString = key.toString(16); 
-  for (var i = 0; i < keyString.length; i++) {
-    var current = keyString[i]; 
-    hashChar += keyString.charCodeAt(current); 
-  }
+// var makeKey = function (key) {
+//   var hashChar = 0; 
+//   var keyString = key.toString(16); 
+//   for (var i = 0; i < keyString.length; i++) {
+//     var current = keyString[i]; 
+//     hashChar += keyString.charCodeAt(current); 
+//   }
 
-  return hashChar % 1000000; 
+//   return hashChar % 1000000; 
+// }
+
+class HashTable {
+  constructor() {
+    this.size = 1000000; 
+    this.storage = Array(this.size); 
+    this.hash = function (key) {
+      var hashNumber = 0; 
+      var keyString = key.toString(); 
+      for (var i = 0; i < keyString.length; i++) {
+        var current = keyString[i]; 
+        hashNumber += key.charCodeAt(current); 
+      }
+      return hasNumber % this.size; 
+    }
+  }
+  
+  insert(key, value) {
+    var idx = this.hash(key); 
+    var bucket = this.storage(idx); 
+
+    if (!bucket) {
+      // add bucket
+    } 
+    
+    // if bucket exists
+      // find key, value pair and add key, value
+    
+    
+  }
 }
 
-console.log(makeKey(15)); 
+
+
 
 
 
