@@ -710,9 +710,18 @@ class HashTable {
 // make insert function 
 
 
+var makeKey = function (key) {
+  var hashChar = 0; 
+  var keyString = key.toString(16); 
+  for (var i = 0; i < keyString.length; i++) {
+    var current = keyString[i]; 
+    hashChar += keyString.charCodeAt(current); 
+  }
 
+  return hashChar % 1000000; 
+}
 
-
+console.log(makeKey(15)); 
 
 
 
