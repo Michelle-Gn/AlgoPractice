@@ -721,35 +721,121 @@
 //   return hashChar % 1000000; 
 // }
 
-class HashTable {
-  constructor() {
-    this.size = 1000000; 
-    this.storage = Array(this.size); 
-    this.hash = function (key) {
-      var hashNumber = 0; 
-      var keyString = key.toString(); 
-      for (var i = 0; i < keyString.length; i++) {
-        var current = keyString[i]; 
-        hashNumber += key.charCodeAt(current); 
-      }
-      return hasNumber % this.size; 
-    }
-  }
+// class HashTable {
+//   constructor() {
+//     this.size = 1000000; 
+//     this.storage = Array(this.size); 
+//     this.hash = function (key) {
+//       var hashNumber = 0; 
+//       var keyString = key.toString(); 
+//       for (var i = 0; i < keyString.length; i++) {
+//         var current = keyString[i]; 
+//         hashNumber += key.charCodeAt(current); 
+//       }
+//       return hashNumber % this.size; 
+//     }
+//   }
   
-  insert(key, value) {
-    var idx = this.hash(key); 
-    var bucket = this.storage(idx); 
+//   insert(key, value) {
+//     var idx = this.hash(key); 
+//     // get bucket
+//     var bucket = this.storage[idx]; 
+    
+//     // if bucket doesn't exist
+//     if (!bucket) {
+//       // add bucket
+//       var bucket = []; 
+//       bucket.push([key, value]); 
+//       this.storage.push(bucket); 
+//       return; 
+//     }
+    
+//     var found = false; 
+//     if (bucket) {
+//       for (var i = 0; i < bucket.length; i++) {
+//         var current = bucket[i]; 
+//         if (key === current[0]) {
+//           current[0] = key; 
+//           current[1] = value; 
+//           found = true; 
+//           break; 
+//         }
+//       }
+//     } 
+    
+//     if (found === false) {
+//       bucket.push([key, value]); 
+//     }
+      
+//   }
 
-    if (!bucket) {
-      // add bucket
+//   print () {
+//     return this.storage; 
+//   }
+
+    
+// }
+
+// var hashtable = new HashTable(); 
+// hashtable.insert('john', 'lennon'); 
+// console.log(hashtable.print()); 
+
+
+// var populateHashTable = function (string) {
+//   var hash = {}; 
+  
+//   for (var i = 0; i < string.length; i++) {
+//     var current = string[i]; 
+//     hash[current] = hash[current] ? hash[current] += 1: 1; 
+//   }
+
+//   return hash; 
+
+// }
+
+// console.log(populateHashTable('hello')); 
+
+// given an array of scooters and a finishing point
+// navigate to the nearest scooter 
+// use all the power on the scooter to travel to the next point 
+// return number of steps traveled on the scooter 
+
+var scooterSteps = function (scooters, finish) {
+  scooters.sort((a,b) => a-b); 
+  let totalTravel = scooters[0], scooterTravel = 0; 
+
+  while (scooters.length && totalTravel < finish) {
+    if (scooters[0] < totalTravel) {
+      scooters = scooters.slice(1); 
+      continue; 
     } 
     
-    // if bucket exists
-      // find key, value pair and add key, value
+    if (scooters[0] > totalTravel) {
+      totalTravel += scooters[0] - totalTravel; 
+    } 
+
+    if (totalTravel + 10 <= finish) {
+      scooterTravel += 10; 
+      totalTravel += 10; 
+    } else {
+      scooterTravel += (finish - totalTravel); 
+      totalTravel += (finish - totalTravel); 
+    }
     
-    
+    scooters = scooters.slice(1); 
   }
+
+  return scooterTravel; 
 }
+
+// [15], finish = 23, total = 14, scooter = 10; 
+// 
+
+console.log(scooterSteps([4, 7, 10, 15], 23)); 
+
+
+
+
 
 
 
