@@ -834,8 +834,206 @@ var scooterSteps = function (scooters, finish) {
 console.log(scooterSteps([4, 7, 10, 15], 23)); 
 
 
+var data = [
+  {
+    timestamp: "2021-10-24 00:00:00Z",
+    user: {
+      first_name: "john",
+      last_name: "doe",
+      id: "12uwx",
+      last_login: "2021-10-24 00:00:00Z",
+    },
+    items: [
+      {
+        sku: "iwuefsd124",
+        qty: 12,
+        unit_price: 32.24,
+      },
+      {
+        sku: "iwuefsd124",
+        qty: 12,
+        unit_price: 32.24,
+      }
+    ],
+  },
+
+  {
+    timestamp: "2021-10-24 00:00:00Z",
+    user: {
+      first_name: "john",
+      last_name: "doe",
+      id: "12uwx",
+      last_login: "2021-10-24 00:00:00Z",
+    },
+    items: [
+      {
+        sku: "iwuefsd124",
+        qty: 12,
+        unit_price: 32.24,
+      },
+      {
+        sku: "iwuefsd124",
+        qty: 12,
+        unit_price: 32.24,
+      }
+    ],
+  },
+
+  {
+    timestamp: "2021-10-24 00:00:00Z",
+    user: {
+      first_name: "jane",
+      last_name: "doe",
+      id: "12uwy",
+      last_login: "2021-10-24 00:00:00Z",
+    },
+    items: [
+      {
+        sku: "iwuefsd124",
+        qty: 12,
+        unit_price: 32.24,
+      },
+      {
+        sku: "iwuefsd124",
+        qty: 12,
+        unit_price: 32.24,
+      }
+    ],
+  },
+
+  {
+    timestamp: "2020-10-24 00:00:00Z",
+    user: {
+      first_name: "jane",
+      last_name: "doe",
+      id: "12uwy",
+      last_login: "2021-10-24 00:00:00Z",
+    },
+    items: [
+      {
+        sku: "iwuefsd124",
+        qty: 12,
+        unit_price: 32.24,
+      },
+      {
+        sku: "iwuefsd124",
+        qty: 12,
+        unit_price: 32.24,
+      }
+    ],
+  }
+];
 
 
+// write a function below that returns a list of the top 15 customers, rated by total amount spent,
+// for the last month in the format of:
+// [
+//   'john doe',
+//   ...
+// ]
+
+var topFifteen = function (data) {
+  // filter for transactions in last month using time stamp
+  var filteredData = data.filter((transaction) => {
+  return transaction.timestamp >= "2021-10-01" && transaction.timestamp <= "2021-10-31"}); 
+
+  // for each transaction calculate total amount spent and store as new property in each transaction
+  for (var i = 0; i < filteredData.length; i++) {
+    var current = filteredData[i]; 
+    var total = 0; 
+    for (var j = 0; j < current.items.length; j++) {
+      total += (current.items[j].qty * current.items[j].unit_price); 
+    }
+    current.total = total; 
+  }
+  
+  var userTotals = {}; 
+
+  for (var i = 0; i < filteredData.length; i++) {
+    var transaction = filteredData[i]; 
+    userTotals[transaction.user.id] = userTotals[transaction.user.id] ? userTotals[transaction.user.id] += transaction.total : transaction.total; 
+  }
+
+  console.log(filteredData); 
+
+  var id_name = {}; 
+  
+  for (var i = 0; i < filteredData.length; i++) {
+    var transaction = filteredData[i];
+    id_name[transaction.user.id] = transaction.user.first_name + ' ' + transaction.user.last_name; 
+  }
+  
+
+  var userTotalsArray = []; 
+
+  for (var key in userTotals) {
+    userTotalsArray.push([key, userTotals[key]]); 
+  }
+  
+  userTotalsArray.sort((a, b) => a[1] - b[1]); 
+
+
+  return ([id_name[userTotalsArray[0][0]]]); 
+
+}
+
+console.log(topFifteen(data)); 
+
+
+var data2 = [['id', 'user', 'timestamp', 'amount'], [12, 'john doe', '10-21-2021', 43], [14, 'jane doe', '10-21-2021', 53]]
+
+class Transaction {
+  constructor (id, user, timestamp, amount) {
+    this.id = id,
+    this.user = user,
+    this.timestamp = timestamp,
+    this.amount = amount
+  }
+}
+
+var createData = function (data) {
+  data.shift(); 
+  var dataset = []; 
+  for (var i = 0; i < data.length; i++) {
+    var inputs = []
+    for (var j = 0; j < data[i].length; j++) {
+      inputs.push(data[i][j]); 
+    }
+    var transaction = new Transaction (...inputs); 
+    dataset.push(transaction); 
+  }
+
+  return dataset; 
+}
+
+console.log(createData(data2)); 
+
+var findAverage = function (data) {
+  // var dataset = createData(data); 
+
+  var sum = data.reduce((sum, transaction) => {
+    console.log(sum); 
+    console.log(transaction); 
+    return sum += transaction}); 
+  console.log('sum', sum); 
+
+  return sum/data.length; 
+}
+
+console.log(findAverage([1,2,3,4])); 
+
+
+var csvData = name,role,country
+Sarene,Help Desk Operator,Thailand
+Olvan,Nurse Practicioner,China
+Janos,Cost Accountant,China
+Dolph,Assistant Manager,China
+Ariela,Database Administrator I,Azerbaijan
+Lane,Environmental Tech,Indonesia
+Griselda,Senior Quality Engineer,Portugal
+Manda,Physical Therapy Assistant,Brazil
+Leslie,Information Systems Manager,Japan
+Aleen,Cost Accountant,Canada
 
 
 
