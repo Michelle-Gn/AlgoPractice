@@ -23,8 +23,13 @@ class TicTacToe {
     if (row >= this.boardWidth || column >= this.boardLength) {
       return 'Invalid board piece'; 
     }
-
-    this.board[row][column] = type; 
+    
+    if (this.board[row][column] === '') {
+      this.board[row][column] = type; 
+    } else {
+      return 'There is already a piece here!'
+    }
+    
   }
 
   deletePiece (row, column) {
@@ -112,14 +117,35 @@ class TicTacToe {
     return (rows || columns || leftDiag || rightDiag); 
   }
 
+  detectTie () {
+    var blanks = 0; 
+    for (var i = 0; i < this.board.length; i++) {
+      for (var j = 0; j < this.board[i].length; j++) {
+        var piece = this.board[i][j]; 
+        if (piece === '') {
+          blanks ++; 
+        }
+      }
+    }
+    
+    if (blanks === 0) {
+      return 'Tie!'; 
+    } else {
+      return 'Continue'; 
+    } 
+  } 
+
 }
 
 var ticTacToe = new TicTacToe(3, 3); 
 console.log(ticTacToe.makeBoard()); 
 ticTacToe.addPiece('x', 0, 2);  
 ticTacToe.addPiece('x', 1, 1); 
-ticTacToe.addPiece('x', 2, 1);  
+ticTacToe.addPiece('x', 2, 1); 
+ticTacToe.addPiece('o', 0, 0); 
+ticTacToe.addPiece('o', 0, 2); 
 console.log(ticTacToe.board); 
+console.log(ticTacToe.detectTie()); 
 console.log(ticTacToe.detectWin());    
 
 // 0, 2
