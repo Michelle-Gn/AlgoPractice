@@ -800,244 +800,325 @@
 // use all the power on the scooter to travel to the next point 
 // return number of steps traveled on the scooter 
 
-var scooterSteps = function (scooters, finish) {
-  scooters.sort((a,b) => a-b); 
-  let totalTravel = scooters[0], scooterTravel = 0; 
+// var scooterSteps = function (scooters, finish) {
+//   scooters.sort((a,b) => a-b); 
+//   let totalTravel = scooters[0], scooterTravel = 0; 
 
-  while (scooters.length && totalTravel < finish) {
-    if (scooters[0] < totalTravel) {
-      scooters = scooters.slice(1); 
-      continue; 
-    } 
+//   while (scooters.length && totalTravel < finish) {
+//     if (scooters[0] < totalTravel) {
+//       scooters = scooters.slice(1); 
+//       continue; 
+//     } 
     
-    if (scooters[0] > totalTravel) {
-      totalTravel += scooters[0] - totalTravel; 
-    } 
+//     if (scooters[0] > totalTravel) {
+//       totalTravel += scooters[0] - totalTravel; 
+//     } 
 
-    if (totalTravel + 10 <= finish) {
-      scooterTravel += 10; 
-      totalTravel += 10; 
-    } else {
-      scooterTravel += (finish - totalTravel); 
-      totalTravel += (finish - totalTravel); 
-    }
+//     if (totalTravel + 10 <= finish) {
+//       scooterTravel += 10; 
+//       totalTravel += 10; 
+//     } else {
+//       scooterTravel += (finish - totalTravel); 
+//       totalTravel += (finish - totalTravel); 
+//     }
     
-    scooters = scooters.slice(1); 
+//     scooters = scooters.slice(1); 
+//   }
+
+//   return scooterTravel; 
+// }
+
+// // [15], finish = 23, total = 14, scooter = 10; 
+// // 
+
+// console.log(scooterSteps([4, 7, 10, 15], 23)); 
+
+
+// var data = [
+//   {
+//     timestamp: "2021-10-24 00:00:00Z",
+//     user: {
+//       first_name: "john",
+//       last_name: "doe",
+//       id: "12uwx",
+//       last_login: "2021-10-24 00:00:00Z",
+//     },
+//     items: [
+//       {
+//         sku: "iwuefsd124",
+//         qty: 12,
+//         unit_price: 32.24,
+//       },
+//       {
+//         sku: "iwuefsd124",
+//         qty: 12,
+//         unit_price: 32.24,
+//       }
+//     ],
+//   },
+
+//   {
+//     timestamp: "2021-10-24 00:00:00Z",
+//     user: {
+//       first_name: "john",
+//       last_name: "doe",
+//       id: "12uwx",
+//       last_login: "2021-10-24 00:00:00Z",
+//     },
+//     items: [
+//       {
+//         sku: "iwuefsd124",
+//         qty: 12,
+//         unit_price: 32.24,
+//       },
+//       {
+//         sku: "iwuefsd124",
+//         qty: 12,
+//         unit_price: 32.24,
+//       }
+//     ],
+//   },
+
+//   {
+//     timestamp: "2021-10-24 00:00:00Z",
+//     user: {
+//       first_name: "jane",
+//       last_name: "doe",
+//       id: "12uwy",
+//       last_login: "2021-10-24 00:00:00Z",
+//     },
+//     items: [
+//       {
+//         sku: "iwuefsd124",
+//         qty: 12,
+//         unit_price: 32.24,
+//       },
+//       {
+//         sku: "iwuefsd124",
+//         qty: 12,
+//         unit_price: 32.24,
+//       }
+//     ],
+//   },
+
+//   {
+//     timestamp: "2020-10-24 00:00:00Z",
+//     user: {
+//       first_name: "jane",
+//       last_name: "doe",
+//       id: "12uwy",
+//       last_login: "2021-10-24 00:00:00Z",
+//     },
+//     items: [
+//       {
+//         sku: "iwuefsd124",
+//         qty: 12,
+//         unit_price: 32.24,
+//       },
+//       {
+//         sku: "iwuefsd124",
+//         qty: 12,
+//         unit_price: 32.24,
+//       }
+//     ],
+//   }
+// ];
+
+
+// // write a function below that returns a list of the top 15 customers, rated by total amount spent,
+// // for the last month in the format of:
+// // [
+// //   'john doe',
+// //   ...
+// // ]
+
+// var topFifteen = function (data) {
+//   // filter for transactions in last month using time stamp
+//   var filteredData = data.filter((transaction) => {
+//   return transaction.timestamp >= "2021-10-01" && transaction.timestamp <= "2021-10-31"}); 
+
+//   // for each transaction calculate total amount spent and store as new property in each transaction
+//   for (var i = 0; i < filteredData.length; i++) {
+//     var current = filteredData[i]; 
+//     var total = 0; 
+//     for (var j = 0; j < current.items.length; j++) {
+//       total += (current.items[j].qty * current.items[j].unit_price); 
+//     }
+//     current.total = total; 
+//   }
+  
+//   var userTotals = {}; 
+
+//   for (var i = 0; i < filteredData.length; i++) {
+//     var transaction = filteredData[i]; 
+//     userTotals[transaction.user.id] = userTotals[transaction.user.id] ? userTotals[transaction.user.id] += transaction.total : transaction.total; 
+//   }
+
+//   console.log(filteredData); 
+
+//   var id_name = {}; 
+  
+//   for (var i = 0; i < filteredData.length; i++) {
+//     var transaction = filteredData[i];
+//     id_name[transaction.user.id] = transaction.user.first_name + ' ' + transaction.user.last_name; 
+//   }
+  
+
+//   var userTotalsArray = []; 
+
+//   for (var key in userTotals) {
+//     userTotalsArray.push([key, userTotals[key]]); 
+//   }
+  
+//   userTotalsArray.sort((a, b) => a[1] - b[1]); 
+
+
+//   return ([id_name[userTotalsArray[0][0]]]); 
+
+// }
+
+// console.log(topFifteen(data)); 
+
+
+// var data2 = [['id', 'user', 'timestamp', 'amount'], [12, 'john doe', '10-21-2021', 43], [14, 'jane doe', '10-21-2021', 53]]
+
+// class Transaction {
+//   constructor (id, user, timestamp, amount) {
+//     this.id = id,
+//     this.user = user,
+//     this.timestamp = timestamp,
+//     this.amount = amount
+//   }
+// }
+
+// var createData = function (data) {
+//   data.shift(); 
+//   var dataset = []; 
+//   for (var i = 0; i < data.length; i++) {
+//     var inputs = []
+//     for (var j = 0; j < data[i].length; j++) {
+//       inputs.push(data[i][j]); 
+//     }
+//     var transaction = new Transaction (...inputs); 
+//     dataset.push(transaction); 
+//   }
+
+//   return dataset; 
+// }
+
+// console.log(createData(data2)); 
+
+// var findAverage = function (data) {
+//   // var dataset = createData(data); 
+
+//   var sum = data.reduce((sum, transaction) => {
+//     console.log(sum); 
+//     console.log(transaction); 
+//     return sum += transaction}); 
+//   console.log('sum', sum); 
+
+//   return sum/data.length; 
+// }
+
+// console.log(findAverage([1,2,3,4])); 
+
+
+// var csvData = 'name,role,country\nSarene,Help Desk Operator,Thailand\nOlvan,Nurse Practicioner,China\nJanos,Cost Accountant,China\nDolph,Assistant Manager,China\nAriela,Database Administrator I,Azerbaijan\nLane,Environmental Tech,Indonesia\nGriselda,Senior Quality Engineer,Portugal\nManda,Physical Therapy Assistant,Brazil\nLeslie,Information Systems Manager,Japan\nAleen,Cost Accountant,Canada'; 
+
+// var parse = function (data, delimeter) {
+//   var finalData = []; 
+  
+//   var firstLineBreak = data.indexOf("\n"); 
+
+//   var headers = csvData.slice(0, firstLineBreak).split(delimeter); 
+  
+//   var rows = csvData.slice(firstLineBreak + 1).split("\n"); 
+
+//   for (var i = 0; i < rows.length; i++) {
+//     var rowObject = {}; 
+//     var currentRow = rows[i].split(delimeter); 
+//     for (var j = 0; j < currentRow.length; j++) {
+//       var key = headers[j]; 
+//       rowObject[key] = currentRow[j]; 
+//     }
+//     finalData.push(rowObject); 
+//   }
+//   return finalData; 
+// }
+
+// console.log(parse(csvData, ',')); 
+
+
+class TicTacToe {
+  constructor(width, length) {
+    this.boardWidth = width; 
+    this.boardLength = length; 
+    this.board = []; 
   }
 
-  return scooterTravel; 
-}
+  makeBoard () {
+    var board = this.board;  
 
-// [15], finish = 23, total = 14, scooter = 10; 
-// 
-
-console.log(scooterSteps([4, 7, 10, 15], 23)); 
-
-
-var data = [
-  {
-    timestamp: "2021-10-24 00:00:00Z",
-    user: {
-      first_name: "john",
-      last_name: "doe",
-      id: "12uwx",
-      last_login: "2021-10-24 00:00:00Z",
-    },
-    items: [
-      {
-        sku: "iwuefsd124",
-        qty: 12,
-        unit_price: 32.24,
-      },
-      {
-        sku: "iwuefsd124",
-        qty: 12,
-        unit_price: 32.24,
+    for (var i = 0; i < this.boardLength; i ++) {
+      board[i] = []; 
+      for (var j = 0; j < this.boardWidth; j++) {
+        board[i].push(''); 
       }
-    ],
-  },
-
-  {
-    timestamp: "2021-10-24 00:00:00Z",
-    user: {
-      first_name: "john",
-      last_name: "doe",
-      id: "12uwx",
-      last_login: "2021-10-24 00:00:00Z",
-    },
-    items: [
-      {
-        sku: "iwuefsd124",
-        qty: 12,
-        unit_price: 32.24,
-      },
-      {
-        sku: "iwuefsd124",
-        qty: 12,
-        unit_price: 32.24,
-      }
-    ],
-  },
-
-  {
-    timestamp: "2021-10-24 00:00:00Z",
-    user: {
-      first_name: "jane",
-      last_name: "doe",
-      id: "12uwy",
-      last_login: "2021-10-24 00:00:00Z",
-    },
-    items: [
-      {
-        sku: "iwuefsd124",
-        qty: 12,
-        unit_price: 32.24,
-      },
-      {
-        sku: "iwuefsd124",
-        qty: 12,
-        unit_price: 32.24,
-      }
-    ],
-  },
-
-  {
-    timestamp: "2020-10-24 00:00:00Z",
-    user: {
-      first_name: "jane",
-      last_name: "doe",
-      id: "12uwy",
-      last_login: "2021-10-24 00:00:00Z",
-    },
-    items: [
-      {
-        sku: "iwuefsd124",
-        qty: 12,
-        unit_price: 32.24,
-      },
-      {
-        sku: "iwuefsd124",
-        qty: 12,
-        unit_price: 32.24,
-      }
-    ],
-  }
-];
-
-
-// write a function below that returns a list of the top 15 customers, rated by total amount spent,
-// for the last month in the format of:
-// [
-//   'john doe',
-//   ...
-// ]
-
-var topFifteen = function (data) {
-  // filter for transactions in last month using time stamp
-  var filteredData = data.filter((transaction) => {
-  return transaction.timestamp >= "2021-10-01" && transaction.timestamp <= "2021-10-31"}); 
-
-  // for each transaction calculate total amount spent and store as new property in each transaction
-  for (var i = 0; i < filteredData.length; i++) {
-    var current = filteredData[i]; 
-    var total = 0; 
-    for (var j = 0; j < current.items.length; j++) {
-      total += (current.items[j].qty * current.items[j].unit_price); 
+      board.push(board[i]); 
     }
-    current.total = total; 
-  }
-  
-  var userTotals = {}; 
-
-  for (var i = 0; i < filteredData.length; i++) {
-    var transaction = filteredData[i]; 
-    userTotals[transaction.user.id] = userTotals[transaction.user.id] ? userTotals[transaction.user.id] += transaction.total : transaction.total; 
+    return board; 
   }
 
-  console.log(filteredData); 
-
-  var id_name = {}; 
-  
-  for (var i = 0; i < filteredData.length; i++) {
-    var transaction = filteredData[i];
-    id_name[transaction.user.id] = transaction.user.first_name + ' ' + transaction.user.last_name; 
+  addPiece (type, row, column) {
+    this.board[row][column] = type; 
   }
-  
 
-  var userTotalsArray = []; 
-
-  for (var key in userTotals) {
-    userTotalsArray.push([key, userTotals[key]]); 
+  deletePiece (row, column) {
+    this.board[row][column] = ''; 
   }
-  
-  userTotalsArray.sort((a, b) => a[1] - b[1]); 
 
+  detectRowsFill () {
+    for (var i = 0; i < this.board.length; i++) {
+      var currentRow = this.board[i]; 
+      var count = {};
+      for (var j = 0; j < currentRow.length; j++) {
+        count[currentRow[j]] = count[currentRow[j]] ? count[currentRow[j]] += 1 : 1; 
+      }
 
-  return ([id_name[userTotalsArray[0][0]]]); 
-
-}
-
-console.log(topFifteen(data)); 
-
-
-var data2 = [['id', 'user', 'timestamp', 'amount'], [12, 'john doe', '10-21-2021', 43], [14, 'jane doe', '10-21-2021', 53]]
-
-class Transaction {
-  constructor (id, user, timestamp, amount) {
-    this.id = id,
-    this.user = user,
-    this.timestamp = timestamp,
-    this.amount = amount
-  }
-}
-
-var createData = function (data) {
-  data.shift(); 
-  var dataset = []; 
-  for (var i = 0; i < data.length; i++) {
-    var inputs = []
-    for (var j = 0; j < data[i].length; j++) {
-      inputs.push(data[i][j]); 
+      for (var key in count) {
+        if (key !== '') {
+          if (count[key] === currentRow.length){
+            return true; 
+          }
+        }  
+      }
     }
-    var transaction = new Transaction (...inputs); 
-    dataset.push(transaction); 
+
+    return false; 
   }
 
-  return dataset; 
+  detectColumnsFill 
+
+  detectWin () {
+    // whole row is populated with x, or o
+    // whole column is populated with x, or o
+    // left diagonal is populated with x or o
+    // right diagnoal is populated with x or o
+  }
+
 }
 
-console.log(createData(data2)); 
+var ticTacToe = new TicTacToe(3, 3); 
+console.log(ticTacToe.makeBoard()); 
+console.log(ticTacToe.board); 
+ticTacToe.addPiece('x', 0, 0); 
+ticTacToe.addPiece('x', 0, 1); 
+ticTacToe.addPiece('x', 0, 2);  
+console.log(ticTacToe.board); 
+console.log(ticTacToe.detectRowsFill()); 
 
-var findAverage = function (data) {
-  // var dataset = createData(data); 
 
-  var sum = data.reduce((sum, transaction) => {
-    console.log(sum); 
-    console.log(transaction); 
-    return sum += transaction}); 
-  console.log('sum', sum); 
 
-  return sum/data.length; 
+class array {
+  constructor()
 }
-
-console.log(findAverage([1,2,3,4])); 
-
-
-var csvData = name,role,country
-Sarene,Help Desk Operator,Thailand
-Olvan,Nurse Practicioner,China
-Janos,Cost Accountant,China
-Dolph,Assistant Manager,China
-Ariela,Database Administrator I,Azerbaijan
-Lane,Environmental Tech,Indonesia
-Griselda,Senior Quality Engineer,Portugal
-Manda,Physical Therapy Assistant,Brazil
-Leslie,Information Systems Manager,Japan
-Aleen,Cost Accountant,Canada
-
-
-
-
-
-
-
