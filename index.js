@@ -1122,3 +1122,5 @@ console.log(ticTacToe.detectRowsFill());
 class array {
   constructor()
 }
+
+// 100[leetcode]
