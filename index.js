@@ -1124,3 +1124,7 @@ class array {
 }
 
 // 100[leetcode]
+
+var binarySearch = function (array, target) {
+
+}
