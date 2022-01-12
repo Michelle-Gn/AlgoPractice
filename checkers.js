@@ -47,7 +47,19 @@ class Checkers {
     }
   }
 
-  
+}
+
+class Piece = {
+  constructor (x, y, type) {
+    this.x = null; 
+    this.y = null; 
+    this.type = type; 
+  }
+
+  move (x, y, board) {
+    board[this.x][this.y] = 'b'; 
+    board[x][y] = new Piece (x, y, 'x');  
+  }
 }
 
 var checkers = new Checkers(8); 
