@@ -1126,5 +1126,10 @@ class array {
 // 100[leetcode]
 
 var binarySearch = function (array, target) {
-
+  var mid = 0; 
+  var left = 0; 
+  var right = array.length - 1; 
+  
 }
+
+

@@ -140,7 +140,10 @@ const longestWord = (words) => {
 // 'appl', isValid = true, key = 'app'
 // 'apple', isValid = true, key = 'appl'
 // 'apply', isValid = true, key = 'appl'
-// 
+
+var map = {a: 0, b: 1}; 
+console.log(map.size); 
+
 
 
 
