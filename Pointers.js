@@ -256,3 +256,4 @@ head.next = new Node(2);
 head.next.next = head; 
 
 console.log(`The head of the linked list is node: ${detectCycle(head)}`); 
+console.log('This is just practice')

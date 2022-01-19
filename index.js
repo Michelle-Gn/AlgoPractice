@@ -1133,3 +1133,27 @@ var binarySearch = function (array, target) {
 }
 
 
+function searchWithFilter(query, filter, pageSize, startFrom) {
+  const page = unfilteredSearch(query, pageSize, startFrom);
+
+  const filteredResults = [];
+  page.results.forEach((result) => {
+    if (filter(result)) {
+      filteredResults.push(result);
+    }
+  });
+    
+  // while filteredResults.length < pageSize or no more results
+    // keep getting more results 
+    // filteredResults 
+
+  return {
+    results: filteredResults,
+    hasMoreResults: page.hasMoreResults,
+  };
+}
+        // [1, 2, 3, 4, 5, ... 1000000]
+searchWithFilter(millionNumbers, num => num > 500000, 50); // { results: [50001, 50002, ...], hasMoreResults: true }
+
+
+
